@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Verification - Bangladesh Smart Voting System</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            max-width: 500px;
+            margin: 100px auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .verify-btn {
+            background-color: #0a9396;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .verify-btn:hover {
+            background-color: #005f73;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>মুখ যাচাই করুন</h2>
+        <video id="camera" width="100%" height="auto" autoplay></video>
+        <button class="verify-btn" onclick="window.location.href='person_location.html';">যাচাই করুন</button>
+        <!-- <button class="verify-btn" onclick="verifyFace()">যাচাই করুন</button> -->
+    </div>
+
+    <script>
+        function verifyFace() {
+            alert("Face verified successfully!");
+            window.location.href = 'election_area.html';
+        }
+    </script>
+</body>
+</html>

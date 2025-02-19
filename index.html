@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangladesh Smart Voting System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            background-color: #005f73;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap; /* Allows wrapping for smaller screens */
+        }
+
+        .navbar h1 {
+            font-size: 26px;
+            margin: 10px 0;
+            flex: 1;
+            text-align: center; /* Center the title on small screens */
+        }
+
+        .navbar-left, .navbar-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* Adjust the navbar items on smaller screens */
+        }
+
+        .navbar-left a,
+        .navbar-right a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 15px;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.2s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar-left a:hover,
+        .navbar-right a:hover {
+            background-color: #0a9396;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(120deg, #005f73, #007e83);
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Section Content */
+        .container {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .container h2 {
+            font-size: 34px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #003366;
+        }
+
+        .container p {
+            font-size: 18px;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Course Sections */
+        .course-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .course-card {
+            background-color: white;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+            margin: 20px;
+            padding: 30px 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #005f73;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .course-card ul {
+            list-style: none;
+            padding-left: 0;
+            text-align: left;
+            color: #555;
+        }
+
+        .course-card ul li {
+            padding: 8px 0;
+            font-size: 16px;
+        }
+
+        .course-card button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .course-card button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Action Buttons */
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            background-color: #005f73;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .button:hover {
+            background-color: #003d5b;
+            transform: translateY(-2px);
+        }
+
+        
+        /* Footer */
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .footer-column a {
+            color: #00c0f0;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-column h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .container h2 {
+                font-size: 26px;
+            }
+
+            .course-card {
+                width: 90%; /* Slightly smaller width to provide spacing */
+            }
+
+            .course-section {
+                flex-direction: column;
+            }
+
+            .button {
+                padding: 10px 18px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-left">
+
+        </div>
+        <h1>বাংলাদেশ নির্বাচন কমিশন</h1>
+        <div class="navbar-right">
+            
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>বাংলাদেশ অনলাইন ভোটিং সিস্টেম</h1>
+        <p>ভোটদান নাগরিকের মৌলিক অধিকার</p>
+    </section>
+
+    <!-- Courses Overview Section -->
+    <div class="container">
+        <!-- <h2> need </h2> -->
+        <!-- <p>need</p> -->
+        <div class="course-section">
+            <div class="course-card">
+                <h3>ভোট দেওয়ার জন্য রেজিস্টার করুন</h3>
+                <ul>
+                    <p>আপনার যদি জাতীয় পরিচয়পত্র থাকে, তাহলে আপনি রেজিস্টার করতে পারেন</p>
+                </ul>
+                <button onclick="window.location.href='register.html';">রেজিস্টার করুন</button>
+            </div>
+            <div class="course-card">
+                <h3>নির্বাচন কমিশন অফিসার</h3>
+                <ul>
+                    <p>ভোট গণনা ও অনান্য কাজের জন্য </p>
+                </ul>
+                <button onclick="window.location.href='#';">লগ ইন</button>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>ই-মেইলঃ <a href="mailto:info@nidw.gov.bd"> info@nidw.gov.bd</a></p>
+                <p>হেল্পলাইনঃ  ১০৫, +৮৮ ০১৭০৮-৫০১২৬১</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="#">About Us</a><br>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <p>যোগাযোগের সময়ঃ রবিবার-বৃহস্পতিবার, সকাল ৯:০০টা - বিকাল ৫:০০টা পর্যন্ত।</p>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <p>&copy;বাংলাদেশ নির্বাচন কমিশন</p>
+    </div>
+    
+</body>
+</html>

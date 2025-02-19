@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভোট সফল - Bangladesh Smart Voting System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            background-color: #005f73;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap; /* Allows wrapping for smaller screens */
+        }
+
+        .navbar h1 {
+            font-size: 26px;
+            margin: 10px 0;
+            flex: 1;
+            text-align: center; /* Center the title on small screens */
+        }
+
+        .navbar-left, .navbar-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* Adjust the navbar items on smaller screens */
+        }
+
+        .navbar-left a,
+        .navbar-right a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 15px;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.2s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .navbar-left a:hover,
+        .navbar-right a:hover {
+            background-color: #0a9396;
+            transform: translateY(-1px);
+        }
+
+        /* Main Container */
+        .container {
+            background-color: white;
+            padding: 30px;
+            max-width: 800px;
+            margin: 50px auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #005f73;
+        }
+
+        .message {
+            font-size: 20px;
+            margin: 20px 0;
+            color: #007a99;
+        }
+
+        .counter {
+            font-size: 22px;
+            font-weight: bold;
+            color: #005f73;
+            margin: 20px 0;
+        }
+
+        /* Button */
+        .back-btn, .results-btn {
+            background: linear-gradient(90deg, #0a9396, #007a99);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            width: 200px;
+            transition: 0.3s ease;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .back-btn:hover, .results-btn:hover {
+            background: linear-gradient(90deg, #007a99, #005f73);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .footer-column a {
+            color: #00c0f0;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-column h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .container h2 {
+                font-size: 26px;
+            }
+
+            .course-card {
+                width: 90%; /* Slightly smaller width to provide spacing */
+            }
+
+            .course-section {
+                flex-direction: column;
+            }
+
+            .button {
+                padding: 10px 18px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">বাংলাদেশ নির্বাচন কমিশন</div>
+
+     <!-- Main Content -->
+     <div class="container">
+        <h2>ভোট সফলভাবে জমা হয়েছে!</h2>
+        <div class="message">আপনার ভোট দেওয়ার জন্য ধন্যবাদ। আপনার অ্যাকাউন্ট অটোমেটিকভাবে লগ আউট হবে।</div>
+        <div class="counter">এখন পর্যন্ত <span id="voteCount">0</span> জন ভোট দিয়েছেন!</div>
+        <button class="back-btn" onclick="goBack()">ফিরে যান</button>
+        <button class="results-btn" onclick="showResults()">ফলাফল দেখুন</button>
+    </div>
+
+    <script>
+        // Simulating the vote count
+        let voteCount = localStorage.getItem('voteCount') ? parseInt(localStorage.getItem('voteCount')) : 0;
+        voteCount++;
+        localStorage.setItem('voteCount', voteCount);
+        document.getElementById('voteCount').innerText = voteCount;
+
+        function goBack() {
+            window.location.href = 'register.html'; // Redirect to the registration page
+        }
+
+        function showResults() {
+            // Redirect to the results page or show results in an alert
+            alert("ফলাফলগুলি শীঘ্রই উপলব্ধ হবে!");
+            // window.location.href = 'results.html'; // Uncomment this line to redirect to results page
+        }
+    </script>
+    
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>ই-মেইলঃ <a href="mailto:info@nidw.gov.bd"> info@nidw.gov.bd</a></p>
+                <p>হেল্পলাইনঃ  ১০৫, +৮৮ ০১৭০৮-৫০১২৬১</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="#">About Us</a><br>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <p>যোগাযোগের সময়ঃ রবিবার-বৃহস্পতিবার, সকাল ৯:০০টা - বিকাল ৫:০০টা পর্যন্ত।</p>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <p>&copy;বাংলাদেশ নির্বাচন কমিশন</p>
+    </div>
+</body>
+</html>
