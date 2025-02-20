@@ -1,10 +1,10 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ভোটার তথ্য - বাংলাদেশ স্মার্ট ভোটিং সিস্টেম</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Voter Information - Bangladesh Smart Voting System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -14,68 +14,77 @@
             color: #444;
         }
 
-        /* Navbar */
         .navbar {
             background-color: #005f73;
             color: white;
             padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            flex-wrap: wrap; /* Allow wrap on smaller screens */
-        }
-
-        .navbar h1 {
+            text-align: center;
             font-size: 24px;
-            margin: 0;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Main Container */
         .container {
-            padding: 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 30px;
+            max-width: 800px;
+            margin: 50px auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: left;
         }
 
-        /* Info Box */
+        .container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #005f73;
+            text-align: center;
+            border-bottom: 2px solid #0a9396;
+            padding-bottom: 5px;
+        }
+
         .info-box {
-            border: 1px solid #ccc;
+            border: 2px solid #007a99;
+            padding: 20px;
+            margin-top: 20px;
             border-radius: 8px;
-            background-color: #f7f9fc; /* Light background for the card */
+            background-color: #f0faff;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 10px 0; /* Space between boxes */
-            padding: 25px; /* Padding around the info box */
         }
 
         .info-box img {
-            width: 150px; /* Slightly larger image */
-            height: 200px;
+            width: 130px;
+            height: 160px;
             display: block;
             margin: 0 auto 15px;
             border-radius: 8px;
-            border: 2px solid #0a9396; /* Border color */
+            border: 3px solid #007a99;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-box p {
+            margin: 6px 0;
+            font-size: 18px;
+            font-weight: 500;
+            color: #005f73;
         }
 
         .submit-btn {
-            background-color: #0a9396; /* Button color */
+            background: linear-gradient(90deg, #0a9396, #007a99);
             color: white;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
             width: 100%;
             transition: 0.3s ease;
             margin-top: 20px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .submit-btn:hover {
-            background-color: #005f73; /* Darker button color on hover */
+            background: linear-gradient(90deg, #007a99, #005f73);
         }
 
         /* Footer */
@@ -153,17 +162,18 @@
                 font-size: 16px;
             }
         }
+
+        .otp-box, .face-box {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+    <div class="navbar">বাংলাদেশ নির্বাচন কমিশন</div>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <h1>বাংলাদেশ নির্বাচন কমিশন</h1>
-    </div>
-
-    <!-- Main Content -->
-    <main class="container">
+    <div class="container">
         <h2>ভোটার তথ্য</h2>
         <div class="info-box">
             <img src="profile.jpg" alt="Voter Photo">
@@ -177,39 +187,78 @@
             <p><strong>বৈবাহিক অবস্থা:</strong> অবিবাহিত</p>
             <p><strong>ধর্ম:</strong> ইসলাম</p>
         </div>
-
+        
         <div class="info-box">
             <p><strong>ভোটার নম্বর:</strong> 987654321</p>
             <p><strong>ভোট কেন্দ্র:</strong> ঢাকা সিটি কলেজ</p>
         </div>
+        
+        <button class="submit-btn" onclick="startVerification()">ভোট দেও</button>
 
-        <button class="submit-btn" onclick="window.location.href='candidate_details.html';">ভোট দেও</button>
-    </main>
+        <div class="otp-box" id="otpBox">
+            <p>আপনার মোবাইল নম্বরে পাঠানো OTP প্রবেশ করুন:</p>
+            <input type="text" id="otp" placeholder="OTP লিখুন">
+            <button class="submit-btn" onclick="verifyOTP()">নিশ্চিত করুন</button>
+        </div>
 
-     <!-- Footer -->
-     <div class="footer">
+        <div class="face-box" id="faceBox">
+            <p>আপনার মুখ ক্যামেরার সামনে আনুন:</p>
+            <video id="video" width="300" height="200" autoplay></video>
+            <button class="submit-btn"  onclick="window.location.href='candidate_details.html';" onclick="verifyFace()">মুখ যাচাই করুন</button>
+        </div>
+    </div>
+
+    <script>
+        function startVerification() {
+            document.getElementById('otpBox').style.display = 'block';
+        }
+
+        function verifyOTP() {
+            let otp = document.getElementById('otp').value;
+            if (otp === "123456") {
+                document.getElementById('otpBox').style.display = 'none';
+                document.getElementById('faceBox').style.display = 'block';
+                startFaceCamera();
+            } else {
+                alert("ভুল OTP, আবার চেষ্টা করুন");
+            }
+        }
+
+        function startFaceCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                document.getElementById('video').srcObject = stream;
+            });
+        }
+
+        function verifyFace() {
+            alert("মুখ যাচাই সফল হয়েছে! আপনি এখন ভোট দিতে পারবেন");
+            window.location.href = 'voting.html';
+        }
+    </script>
+
+    <!-- Footer -->
+    <div class="footer">
         <div class="footer-content">
             <div class="footer-column">
                 <h3>Contact Us</h3>
-                <p>ই-মেইলঃ <a href="mailto:info@nidw.gov.bd"> info@nidw.gov.bd</a></p>
-                <p>হেল্পলাইনঃ  ১০৫, +৮৮ ০১৭০৮-৫০১২৬১</p>
+                <p>ই-মেইলঃ <a href="mailto:info@nidw.gov.bd">info@nidw.gov.bd</a></p>
+                <p>হেল্পলাইনঃ ১০৫, +৮৮ ০১৭০৮-৫০১২৬১</p>
             </div>
             <div class="footer-column">
                 <h3>Quick Links</h3>
-                <a href="#">About Us</a><br>
+                <a href="#">About Us</a>
                 <a href="#">Privacy Policy</a>
             </div>
             <div class="footer-column">
                 <h3>Follow Us</h3>
                 <div class="social-icons">
-                    <p>যোগাযোগের সময়ঃ রবিবার-বৃহস্পতিবার, সকাল ৯:০০টা - বিকাল ৫:০০টা পর্যন্ত।</p>
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
-        <p>&copy;বাংলাদেশ নির্বাচন কমিশন</p>
+        <p>&copy; ২০২৫ বাংলাদেশ নির্বাচন কমিশন</p>
     </div>
 </body>
 </html>
