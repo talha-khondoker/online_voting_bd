@@ -1,55 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Verification - Bangladesh Smart Voting System</title>
+    <title>মুখমণ্ডল যাচাই - Bangladesh Smart Voting System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f7f9fc;
-            text-align: center;
+            color: #333;
         }
+
+        .navbar {
+            background-color: #005f73;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
         .container {
             background-color: white;
-            padding: 40px;
-            max-width: 500px;
-            margin: 100px auto;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 50px auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: center;
         }
-        .verify-btn {
-            background-color: #0a9396;
+
+        .container h2 {
+            font-size: 26px;
+            color: #005f73;
+        }
+
+        video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            border: 2px solid #007a99;
+        }
+
+        .capture-btn {
+            background: linear-gradient(90deg, #0a9396, #007a99);
             color: white;
             padding: 12px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
-            width: 100%;
-            transition: background-color 0.3s ease;
             margin-top: 20px;
+            width: 100%;
+            font-weight: 700;
+            transition: 0.3s ease;
         }
-        .verify-btn:hover {
-            background-color: #005f73;
+
+        .capture-btn:hover {
+            background: linear-gradient(90deg, #007a99, #005f73);
+        }
+
+        .status-message {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007a99;
+        }
+
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .container h2 {
+                font-size: 22px;
+            }
+
+            .capture-btn {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <h1>বাংলাদেশ নির্বাচন কমিশন</h1>
+    </div>
+
     <div class="container">
-        <h2>মুখ যাচাই করুন</h2>
-        <video id="camera" width="100%" height="auto" autoplay></video>
-        <button class="verify-btn" onclick="window.location.href='person_location.html';">যাচাই করুন</button>
-        <!-- <button class="verify-btn" onclick="verifyFace()">যাচাই করুন</button> -->
+        <h2>মুখমণ্ডল যাচাই করুন</h2>
+        <video id="video" autoplay></video>
+        <p class="status-message" id="status">অনুগ্রহ করে ক্যামেরার দিকে তাকান...</p>
+        <button class="capture-btn" id="capture" onclick="window.location.href='person_location.html';">যাচাই করুন</button>
+    </div>
+
+    <div class="footer">
+        <p>&copy; ২০২৫ বাংলাদেশ নির্বাচন কমিশন</p>
     </div>
 
     <script>
-        function verifyFace() {
-            alert("Face verified successfully!");
-            window.location.href = 'election_area.html';
+        let video = document.getElementById('video');
+        let statusMessage = document.getElementById('status');
+
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (error) {
+                statusMessage.textContent = "ক্যামেরা চালু করা সম্ভব হয়নি। অনুমতি দিন!";
+                console.error("Camera access error:", error);
+            }
         }
+
+        async function verifyFace() {
+            statusMessage.textContent = "যাচাই করা হচ্ছে...";
+            const model = await blazeface.load();
+            const predictions = await model.estimateFaces(video, false);
+
+            if (predictions.length > 0) {
+                statusMessage.textContent = "মুখ শনাক্ত হয়েছে! অনুগ্রহ করে অপেক্ষা করুন...";
+                setTimeout(() => {
+                    window.location.href = "election_area.html";  // Proceed after verification
+                }, 2000);
+            } else {
+                statusMessage.textContent = "কোনো মুখ শনাক্ত হয়নি! আবার চেষ্টা করুন।";
+            }
+        }
+
+        document.getElementById('capture').addEventListener('click', verifyFace);
+
+        startCamera();
     </script>
 </body>
 </html>
